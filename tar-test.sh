@@ -7,7 +7,8 @@ TARPGM=../mytar.py
 
 rm -rf dst
 mkdir dst
-(cd src; $TARPGM c ../foogoo.tar foo.txt goo.gif) | (cd dst; $TARPGM x ../foogoo.tar)
+(cd src; $TARPGM c ../foogoo.tar foo.txt goo.gif)
+(cd dst; $TARPGM x ../foogoo.tar)
 if diff -r src dst
 then
     echo "success" >&2		# error msg to stdout
