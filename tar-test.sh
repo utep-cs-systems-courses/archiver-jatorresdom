@@ -8,6 +8,7 @@ TARPGM=../mytar.py
 rm -rf dst
 mkdir dst
 (cd src; $TARPGM c ../foogoo.tar foo.txt goo.gif)
+
 (cd dst; $TARPGM x ../foogoo.tar)
 if diff -r src dst
 then
