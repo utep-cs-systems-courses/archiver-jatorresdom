@@ -3,11 +3,11 @@
 
 #set -x  #uncomment for execution logging - try it
 
-TARPGM=tar
+TARPGM=../mytar.py
 
 rm -rf dst
 mkdir dst
-(cd src; $TARPGM c *) | (cd dst;  tar x)
+(cd src; $TARPGM c ../foogoo.tar foo.txt goo.gif) | (cd dst; $TARPGM x ../foogoo.tar)
 if diff -r src dst
 then
     echo "success" >&2		# error msg to stdout
@@ -18,4 +18,3 @@ else
     exit 1			# return failure
 fi
      
-
