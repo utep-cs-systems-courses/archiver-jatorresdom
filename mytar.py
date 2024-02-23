@@ -27,6 +27,9 @@ def extract_archive(archive_path):
             with open(filename, 'wb') as f:
                 f.write(file_content)
 
+#Inband Framer and Outband Framer Implementation
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Usage: mytar.py [c|x] [archive_name] [files...]", file=sys.stderr)
