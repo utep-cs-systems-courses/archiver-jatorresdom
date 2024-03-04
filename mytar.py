@@ -2,7 +2,7 @@
 import sys
 import os
 
-def create_archive(archive_path, filenames):
+def create_archive_outband(archive_path, filenames):
     with open(archive_path, 'wb') as archive:
         for filename in filenames:
             # Use the filename directly in the current directory
@@ -11,7 +11,7 @@ def create_archive(archive_path, filenames):
                 header = f"{filename}:{len(content)}:".encode()
                 archive.write(header + content)
 
-def extract_archive(archive_path):
+def extract_archive_outband(archive_path):
     with open(archive_path, 'rb') as archive:
         content = archive.read()
         while content:
@@ -31,18 +31,19 @@ def extract_archive(archive_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: mytar.py [c|x] [archive_name] [files...]", file=sys.stderr)
+    if len(sys.argv) < 4:
+        print("Usage: mytar.py [i|o] [c|x] [archive_name] [files...]", file=sys.stderr)
         sys.exit(1)
 
-    operation = sys.argv[1]
-    archive_name = sys.argv[2]  # Use the given path directly without converting to absolute path
+    type_extract = sys.argv[1]
+    operation = sys.argv[2]
+    archive_name = sys.argv[3]  # Use the given path directly without converting to absolute path
 
-    if operation == "c":
-        files_to_archive = sys.argv[3:]
-        create_archive(archive_name, files_to_archive)
-    elif operation == "x":
-        extract_archive(archive_name)
+    if operation == "c" and type_extract == "o":
+        files_to_archive = sys.argv[4:]
+        create_archive_outband(archive_name, files_to_archive)
+    elif operation == "x" and type_extract == "o":
+        extract_archive_outband(archive_name)
     else:
         print(f"Unknown operation: {operation}", file=sys.stderr)
         sys.exit(1)
